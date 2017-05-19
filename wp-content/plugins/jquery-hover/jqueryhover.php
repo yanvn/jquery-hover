@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Jquery Hover
- * Plugin URI:  https://wordpress.org/plugins/jqueryhover/
+ * Plugin URI:  http://walloos.com
  * Text Domain: jqueryhover
  * Domain Path: /languages
- * Description: Visually compresses the administrative meta-boxes so that more admin page content can be initially seen. The plugin that lets you hide 'unnecessary' items from the WordPress administration menu, for all roles of your install. You can also hide post meta controls on the edit-area to simplify the interface. It is possible to simplify the admin in different for all roles.
+ * Description: Giúp tạo các hiệu ứng ô vuông khi rê chuột lên sản phẩm, để hoạt động cần có element với ID="msb-products"
  * Author:      Anh Vo
- * Author URI:  http://walloos.com/
- * Version:     1.0
+ * Author URI:  http://walloos.com
+ * Version:     1.1
  * License:     GPLv3+
  *
  * @package WordPress
@@ -23,6 +23,13 @@
         wp_enqueue_script(
          '_mw_adminimize_remove_footer',
          WP_PLUGIN_URL . '/jquery-hover/js/main.js',
+         array( 'jquery' )
+        );
+    }
+    if (is_page('san-pham')) {
+        wp_enqueue_script(
+         '_mw_adminimize_remove_footer',
+         WP_PLUGIN_URL . '/jquery-hover/js/main-product.js',
          array( 'jquery' )
         );
     }

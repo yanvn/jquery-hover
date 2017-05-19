@@ -2,7 +2,7 @@
 
     $(window).load(function() {
 
-        var section     = $('div[itemprop="mainContentOfPage"]');
+        var section     = $('#mbc-products');
         let hoverBoxes  = section.find('.hover_box');
         let boxes       = [];
         let profile     = [];
@@ -10,6 +10,8 @@
         let colours     = [];
         let background  = [];
         let hover       = [];
+        let tnKey       = null;
+        let fxActive    = false;
 
         let total       = 8;
         let cols        = total / 2;
@@ -18,18 +20,18 @@
         let boxh        = section.height() / rows;
 
         //main background color
-        background = ['#113362', '#015893'];
+        background = ['#113362', '#007AC0'];
 
         //the colour of all the boxes are bellow here
         colours[0] = ['#131b47', '#1a4e8b'];
         colours[1] = '#1a4e8b';
         colours[2] = '#FFFFFF';
-        colours[3] = '#FFFFFF';
-        colours[4] = '#23B5E9';
-        colours[5] = '#FFFFFF';
-        colours[6] = 'yellow';
-        colours[7] = '#1B75BB';
-        colours[8] = '#FFFFFF';
+        colours[3] = '#23B5E9';
+        colours[4] = '#FFFFFF';
+        colours[5] = '#23B5E9';
+        colours[6] = '#1079b2';
+        colours[7] = '#FFFFFF';
+        colours[8] = '#3d3a3e';
 
         profile[0] = { x1: 0, y1: 15, x2: 1, y2: 10, x3: -9, y3: 11, x4: 0, y4: 1 };
         profile[1] = { x1: 0, y1: 10, x2: 0, y2: 10, x3: 0, y3: 1, x4: -10, y4: 11 };
@@ -169,6 +171,17 @@
 
         function effectIn(key) {
 
+            if (fxActive && key != null && key !== tnKey) {
+                setTimeout(() => {
+                    fxActive = false;
+                    effectIn(key);
+                }, 120);
+                return false;
+            }
+
+            fxActive = true;
+            tnKey = key;
+
             $.each(animate[key], function(k, aniVal) {
 
                 $.each(aniVal, function(kval, bval) {
@@ -187,6 +200,8 @@
         }
 
         function effectOut(key) {
+
+            fxActive = true;
 
             $.each(animate[key], function(k, aniVal) {
                 $.each(aniVal, function(kval, bval) {
@@ -231,32 +246,34 @@
                     setTimeout(() => effectIn(key), 230);
                     setTimeout(() => effectIn(key), 240);
                     setTimeout(() => effectIn(key), 250);
+                    setTimeout(() => fxActive = false, 250);
                     break;
 
                 case 'effectOut':
+                    setTimeout(() => effectOut(key), 5);
                     setTimeout(() => effectOut(key), 10);
+                    setTimeout(() => effectOut(key), 15);
                     setTimeout(() => effectOut(key), 20);
+                    setTimeout(() => effectOut(key), 25);
                     setTimeout(() => effectOut(key), 30);
+                    setTimeout(() => effectOut(key), 35);
                     setTimeout(() => effectOut(key), 40);
+                    setTimeout(() => effectOut(key), 45);
+                    setTimeout(() => effectOut(key), 50);
+                    setTimeout(() => effectOut(key), 55);
                     setTimeout(() => effectOut(key), 60);
+                    setTimeout(() => effectOut(key), 65);
+                    setTimeout(() => effectOut(key), 70);
+                    setTimeout(() => effectOut(key), 75);
                     setTimeout(() => effectOut(key), 80);
+                    setTimeout(() => effectOut(key), 85);
                     setTimeout(() => effectOut(key), 90);
                     setTimeout(() => effectOut(key), 100);
+                    setTimeout(() => effectOut(key), 105);
                     setTimeout(() => effectOut(key), 110);
+                    setTimeout(() => effectOut(key), 115);
                     setTimeout(() => effectOut(key), 120);
-                    setTimeout(() => effectOut(key), 130);
-                    setTimeout(() => effectOut(key), 140);
-                    setTimeout(() => effectOut(key), 150);
-                    setTimeout(() => effectOut(key), 160);
-                    setTimeout(() => effectOut(key), 170);
-                    setTimeout(() => effectOut(key), 180);
-                    setTimeout(() => effectOut(key), 190);
-                    setTimeout(() => effectOut(key), 200);
-                    setTimeout(() => effectOut(key), 210);
-                    setTimeout(() => effectOut(key), 220);
-                    setTimeout(() => effectOut(key), 230);
-                    setTimeout(() => effectOut(key), 240);
-                    setTimeout(() => effectOut(key), 250);
+                    setTimeout(() => fxActive = false, 120);
                     break;
 
             }
@@ -270,8 +287,6 @@
 
                 if (animate[key]) {
 
-                    console.log(key);
-
                     hover[key] = !hover[key] ? true : false
 
                     if (hover[key] == true) effect('effectIn', key);
@@ -282,9 +297,6 @@
             });
 
         });
-
-        console.log(boxes);
-
 
   });
 
